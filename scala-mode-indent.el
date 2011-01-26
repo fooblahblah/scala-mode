@@ -119,16 +119,7 @@
     (current-column)))
 
 (defun scala-block-indentation ()
-  (let ((block-start-eol (scala-point-after (end-of-line)))
-        (block-after-spc (scala-point-after (scala-forward-spaces))))
-    (if (> block-after-spc block-start-eol)
-	(progn
-	  (beginning-of-line)
-	  (when (search-forward ")" block-start-eol t)
-	    (scala-forward-spaces)
-	    (backward-sexp))
-	  (+ (current-indentation) scala-mode-indent:step))
-      (current-column))))
+  (+ (current-indentation) scala-mode-indent:step))
 
 (defun scala-indentation-from-following ()
   ;; Return suggested indentation based on the following part of the
